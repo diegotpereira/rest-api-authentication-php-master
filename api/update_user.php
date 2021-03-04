@@ -34,22 +34,38 @@ if ($jwt) {
         $user->lastname = $data->lastname;
         $user->email = $data->email;
         $user->password = $data->password;
-        $user->id = $decoded->data_id;
+        $user->id = $decoded->data->id;
 
         if ($user->update()) {
             # code...
+            $token = array(
+                "iat" => $issued_at,
+                "exp" => $expiration_time,
+                "iss" => $issuer,
+                "data"=> array(
+                    "id" => $user->id,
+                    "firstname" => $user->firstname,
+                    "lastaname" => $user->lastname,
+                    "email" => $user->email
+                )
+            );
+
+            $jwt = JWT::encode($token, $key);
+
+            http_response_code(200);
+
+            echo json_encode(
+                array(
+                    "message" => "O usuário foi atualizado.",
+                    "jwt"=> $jwt
+                )
+            );
         } else {
             # code...
             http_response_code(401);
 
             echo json_encode(array("message" => "Não foi possível atualizar o usuário"));
         }
-        
-
-
-
-
-
     } catch (Exception $e) {
         //Exception
         http_response_code(401);
