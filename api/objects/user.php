@@ -52,9 +52,12 @@ class User{
     }
     function emailExists(){
 
-        $query = "SELECT id, firstname, lastname, password FROM " . $this->table_name . " WHERE email = ? LIMIT 0,1";
+        $query = "SELECT id, firstname, lastname, password
+            FROM " . $this->table_name . "
+            WHERE email = ?
+            LIMIT 0,1";
 
-        $stmt = $this->conn->prepare($query);
+        $stmt = $this->conn->prepare( $query );
 
         $this->email=htmlspecialchars(strip_tags($this->email));
 
