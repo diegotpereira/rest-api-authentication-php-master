@@ -1,9 +1,9 @@
 <?php
-header("Access-Control-Allow-Origin: http://localhost:8000/rest-api-authentication-php-master/");
+header("Access-Control-Allow-Origin: rest-api-authentication-php-master/");
 header("Content-Type: application/json; charset=UTF-8");
-header("Access-Control-Allow-Methods: POST");
+header("Access-Control-Allow-Methods: GET,POST,PUT,PATCH,DELETE");
 header("Access-Control-Max-Age: 3600");
-header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With,Accept");
+header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With, Accept");
 
 include_once 'config/core.php';
 include_once 'libs/php-jwt-master/src/BeforeValidException.php';
